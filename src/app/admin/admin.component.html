@@ -1,0 +1,48 @@
+<div class="card mt-4">
+  <h4 class="card-header">Admin</h4>
+  <div class="card-body">
+    <p>This page can be accessed <u><b>only by an Admin</b></u>.</p>
+    <p class="mb-1">All users from secure (admin only) api end point:</p>
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <!-- <ul *ngIf="users">
+      <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
+    </ul> -->
+  </div>
+  <div *ngIf="users" class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-8">
+            <h2>All User <b>Details</b></h2>
+          </div>
+          <div class="col-sm-4">
+            <button (click)="openCreateModal()" type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Add New</button>
+          </div>
+        </div>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>username</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>role</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{user.username}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.role}}</td>
+            <td>
+              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

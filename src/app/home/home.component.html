@@ -1,0 +1,47 @@
+<div class="card mt-4">
+  <h4 class="card-header">Home</h4>
+  <div class="card-body">
+    <p>You're logged in to the Angular Admin Management portal!!</p>
+    <p>Your role is: <strong>{{user.role}}</strong>.</p>
+    <p>This page is accessible by <u>all authenticated users</u>.</p>
+    <p class="mb-1">Current user from secure api end point:</p>
+    <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
+    <!-- <ul *ngIf="userFromApi">
+      <li>{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
+    </ul> -->
+  </div>
+  <div *ngIf="userFromApi" class="container">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-8">
+            <h2><b>Authenticated User Details</b></h2>
+          </div>
+        </div>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>username</th>
+            <th>firstname</th>
+            <th>lastname</th>
+            <th>role</th>
+            <th>actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{userFromApi.username}}</td>
+            <td>{{userFromApi.firstName}}</td>
+            <td>{{userFromApi.lastName}}</td>
+            <td>{{userFromApi.role}}</td>
+            <td>
+              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
