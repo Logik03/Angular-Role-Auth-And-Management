@@ -77,12 +77,10 @@ export class BackendInterceptor implements HttpInterceptor {
 
       let params = body;
       let user = users.find(u => u.id === idFromUrl());
-
       // only update password if entered
       if (!params.password) {
         delete params.password;
       }
-
       // update and save user
       Object.assign(user, params);
       localStorage.setItem('users', JSON.stringify(users));

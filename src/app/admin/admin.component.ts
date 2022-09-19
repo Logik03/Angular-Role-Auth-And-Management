@@ -32,5 +32,6 @@ export class AdminComponent implements OnInit {
     modalRef.componentInstance.clickevent.subscribe((res) => {
       this.response = res;
     })
+    
   }
 }
