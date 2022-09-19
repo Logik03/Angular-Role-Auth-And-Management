@@ -36,8 +36,8 @@
             <td>{{userFromApi.lastName}}</td>
             <td>{{userFromApi.role}}</td>
             <td>
-              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
+              <a class="edit" title="Edit" data-toggle="tooltip" (click)="edit()"><i class="material-icons"></i></a>
+              <a class="delete" title="Delete" data-toggle="tooltip"  (click)="delete()"><i class="material-icons"></i></a>
             </td>
           </tr>
         </tbody>

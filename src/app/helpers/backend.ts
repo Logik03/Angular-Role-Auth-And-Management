@@ -66,9 +66,10 @@ export class BackendInterceptor implements HttpInterceptor {
       }
 
       user.id = users.length ? Math.max(...users.map(x => x.id)) + 1 : 1;
-      users.push(user);
+      users.push(user.data);
+      console.log(users);
       localStorage.setItem('users', JSON.stringify(users));
-      return success();
+      return success('a user has been succesfully saved to the database');
     }
 
     function updateUser() {

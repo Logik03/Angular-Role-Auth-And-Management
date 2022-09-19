@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 
@@ -13,14 +14,30 @@ export class CreateComponent implements OnInit {
   @ViewChild('myModal', { static: false }) modal: ElementRef;
   closeResult = '';
   registerForm: FormGroup;
+  @Output() clickevent = new EventEmitter<string>();
+  response;
 
-  constructor(public activeModal: NgbActiveModal, private userservice:UserService) {}
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+
+  constructor(
+    public activeModal: NgbActiveModal, 
+    private userservice:UserService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private modalService: NgbModal
+    ) {}
+  ngOnInit(){
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      role: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   open() {
-    this.modal.nativeElement.style.display = 'block';
+    //const modalRef = this.modalService.open(NgbdModal);
   }
 
   close() {
@@ -29,9 +46,11 @@ export class CreateComponent implements OnInit {
 
   onSubmit($event) {
     const formValue = this.registerForm.value;
-    this.userservice.update(5, formValue)
+    this.userservice.create(formValue)
     .subscribe( response => {
-       console.log(response);
+      this.response = response;
     });
+    this.activeModal.dismiss('Cross click')
+    this.clickevent.next(this.response);
   }
 }

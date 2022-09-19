@@ -28,4 +28,10 @@ export class HomeComponent implements OnInit {
     //console.log(this.userFromApi);
     //console.log(this.user);
   }
+  edit() {
+
+  }
+  delete() {
+    
+  }
 }

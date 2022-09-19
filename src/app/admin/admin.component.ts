@@ -11,6 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AdminComponent implements OnInit {
   loading = false;
+  response : string;
   users : User[] = [];
   @ViewChild('modal', { static: false }) modal: CreateComponent
 
@@ -26,7 +27,10 @@ export class AdminComponent implements OnInit {
     })
   }
   openCreateModal() {
-    console.log('i got clicked');
+    //console.log('i got clicked');
     const modalRef = this.modalService.open(CreateComponent);
+    modalRef.componentInstance.clickevent.subscribe((res) => {
+      this.response = res;
+    })
   }
 }
