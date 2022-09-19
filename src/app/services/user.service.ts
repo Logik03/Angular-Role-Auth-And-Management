@@ -23,6 +23,6 @@ export class UserService {
   }
 
   delete(id:number) {
-    return this.http.delete<User>(`${environment.apiUrl}/users/delete/${id}`);
+    return this.http.delete<any>(`${environment.apiUrl}/users/${id}`);
   }
 }

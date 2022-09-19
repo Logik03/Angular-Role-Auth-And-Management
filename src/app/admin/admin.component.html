@@ -35,7 +35,7 @@
             <td>{{user.role}}</td>
             <td>
               <a (click)="openEditModal()" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-              <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
+              <a (click)="delete()"class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
             </td>
           </tr>
         </tbody>

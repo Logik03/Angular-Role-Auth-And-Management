@@ -11,7 +11,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AdminComponent implements OnInit {
   loading = false;
-  response : string;
+  response : String;
   users : User[] = [];
   user : User;
   edit: boolean = false;
@@ -41,5 +41,10 @@ export class AdminComponent implements OnInit {
     const modalRef = this.modalService.open(CreateComponent);
     modalRef.componentInstance.edit = this.edit;
     modalRef.componentInstance.user = this.user;
+  }
+  delete() {
+    this.userService.delete(this.user.id).subscribe((res) => {
+      this.response = res;
+    })
   }
 }

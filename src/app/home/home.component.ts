@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   user: User;
   userFromApi : User;
   edit: boolean = false;
-  response: string;
+  response: string = '';
 
   constructor(private userService: UserService, private auth: AuthService, private modalService: NgbModal,) {
     this.user = this.auth.userValue;
@@ -37,6 +37,8 @@ export class HomeComponent implements OnInit {
     })
   }
   delete() {
-
+    this.userService.delete(this.user.id).subscribe((res) => {
+      this.response = res;
+    })
   }
 }

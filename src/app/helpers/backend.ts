@@ -93,7 +93,7 @@ export class BackendInterceptor implements HttpInterceptor {
 
       users = users.filter(x => x.id !== idFromUrl());
       localStorage.setItem('users', JSON.stringify(users));
-      return success();
+      return success('You have Succesfully Deleted This User');
     }
 
     function getUsers() {
