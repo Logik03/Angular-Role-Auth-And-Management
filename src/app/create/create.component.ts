@@ -1,5 +1,5 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
-import { NgbModal, ModalDismissReasons, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { NgbModal, ModalDismissReasons, NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../services';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -14,8 +14,12 @@ export class CreateComponent implements OnInit {
   @ViewChild('myModal', { static: false }) modal: ElementRef;
   closeResult = '';
   registerForm: FormGroup;
+  updateForm: FormGroup;
   @Output() clickevent = new EventEmitter<string>();
+  @Input() edit;
+  @Input() user;
   response;
+  
 
 
   constructor(
@@ -34,6 +38,13 @@ export class CreateComponent implements OnInit {
       role: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.updateForm = this.fb.group({
+      username: [this.user.username, Validators.required],
+      firstName: [this.user.firstName, Validators.required],
+      lastName: [this.user.lastName, Validators.required],
+      role: [this.user.role, Validators.required],
+    });
   }
 
   open() {
@@ -49,6 +60,16 @@ export class CreateComponent implements OnInit {
     this.userservice.create(formValue)
     .subscribe( response => {
       this.response = response;
+    });
+    this.activeModal.dismiss('Cross click')
+    this.clickevent.next(this.response);
+  }
+  updateUser($event) {
+    const formValue = this.updateForm.value;
+    this.userservice.update(this.user.id, formValue)
+      .subscribe(response => {
+        this.response = response;
+        console.log(this.response, this.user.id);
     });
     this.activeModal.dismiss('Cross click')
     this.clickevent.next(this.response);

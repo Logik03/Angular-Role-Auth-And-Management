@@ -4,9 +4,6 @@
     <p>This page can be accessed <u><b>only by an Admin</b></u>.</p>
     <p class="mb-1">All users from secure (admin only) api end point:</p>
     <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-    <!-- <ul *ngIf="users">
-      <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-    </ul> -->
   </div>
   <div *ngIf="users" class="container">
     <div class="table-wrapper">
@@ -37,7 +34,7 @@
             <td>{{user.lastName}}</td>
             <td>{{user.role}}</td>
             <td>
-              <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
+              <a (click)="openEditModal()" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
               <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
             </td>
           </tr>

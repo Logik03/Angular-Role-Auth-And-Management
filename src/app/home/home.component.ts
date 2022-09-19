@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 //
 import { User } from '../interfaces';
 import { UserService, AuthService } from '../services';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateComponent } from '../create/create.component';
 
 
 @Component({ 
@@ -12,8 +14,10 @@ export class HomeComponent implements OnInit {
   loading = false;
   user: User;
   userFromApi : User;
+  edit: boolean = false;
+  response: string;
 
-  constructor(private userService : UserService, private auth: AuthService) {
+  constructor(private userService: UserService, private auth: AuthService, private modalService: NgbModal,) {
     this.user = this.auth.userValue;
   }
 
@@ -21,17 +25,18 @@ export class HomeComponent implements OnInit {
     this.loading = true;
 
     this.userFromApi = this.user;
-    /* this.userService.getById(this.user.id).subscribe(user => {
-      this.userFromApi= this.user;
-    }) */
     this.loading = false;
-    //console.log(this.userFromApi);
-    //console.log(this.user);
   }
-  edit() {
-
+  openEditModal() {
+    this.edit = true;
+    const modalRef = this.modalService.open(CreateComponent);
+    modalRef.componentInstance.edit = this.edit;
+    modalRef.componentInstance.user = this.user;
+    modalRef.componentInstance.clickevent.subscribe((res) => {
+      this.response = res;
+    })
   }
   delete() {
-    
+
   }
 }

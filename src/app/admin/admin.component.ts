@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild } from '@angular/core';
 //
 import { User } from '../interfaces';
-import { UserService } from '../services';
+import { AuthService, UserService } from '../services';
 import { CreateComponent } from '../create/create.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,10 +13,12 @@ export class AdminComponent implements OnInit {
   loading = false;
   response : string;
   users : User[] = [];
+  user : User;
+  edit: boolean = false;
   @ViewChild('modal', { static: false }) modal: CreateComponent
 
-  constructor(private userService: UserService, private modalService: NgbModal) {
-    
+  constructor(private userService: UserService, private modalService: NgbModal, private auth: AuthService) {
+    this.user = this.auth.userValue;
   }
 
   ngOnInit() {
@@ -33,5 +35,11 @@ export class AdminComponent implements OnInit {
       this.response = res;
     })
     
+  }
+  openEditModal() {
+    this.edit = true;
+    const modalRef = this.modalService.open(CreateComponent);
+    modalRef.componentInstance.edit = this.edit;
+    modalRef.componentInstance.user = this.user;
   }
 }

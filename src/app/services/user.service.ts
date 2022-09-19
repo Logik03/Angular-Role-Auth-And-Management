@@ -18,11 +18,8 @@ export class UserService {
   create(data: any) {
     return this.http.post<User>(`${environment.apiUrl}/users/register`, {data})
   }
-  /* create(username: string, password:string, firstName: string, lastName:string, role:string ) {
-    return this.http.post<User>(`${ environment.apiUrl }/users/create` , {username, password,firstName,lastName,role})
-  } */
   update(id: number, data:any) {
-    return this.http.put<User>(`${environment.apiUrl}/users/update/${id}` , {data});
+    return this.http.put<User>(`${environment.apiUrl}/users/${id}` , {data});
   }
 
   delete(id:number) {
